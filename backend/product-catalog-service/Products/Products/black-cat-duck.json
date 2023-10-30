@@ -1,6 +1,7 @@
 {
-	"ProductName": "Mutant Rubber Duck",
+	"DomainId": "47a2487b-f4a4-4fb4-8029-8cce3e7d3906",
+	"ProductName": "Black Rubber Cat",
 	"Description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
-	"ImageName": "mutant-duck.jpeg",
+	"ImageName": "black-cat-duck.jpeg",
 	"Price": 5.0
 }

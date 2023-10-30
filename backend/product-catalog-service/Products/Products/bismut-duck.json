@@ -1,6 +1,7 @@
 {
-	"ProductName": "Perry The Rubber Duck",
+	"DomainId": "e886dc36-04e5-4c81-a7d1-863ba94c5176",
+	"ProductName": "Bismuth Rubber Duck",
 	"Description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
-	"ImageName": "perry-duck.jpeg",
+	"ImageName": "bismuth-duck.jpeg",
 	"Price": 5.0
 }
