@@ -10,8 +10,51 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Products\124dc85b-b4b5-49d2-aaed-ff7ff515935d.json" />
+    <Content Remove="Products\1475a79a-e38c-43e9-915b-c71d50dc6a64.json" />
+    <Content Remove="Products\22bc9cfc-f2cd-4d18-b251-434d06b7618c.json" />
+    <Content Remove="Products\47a2487b-f4a4-4fb4-8029-8cce3e7d3906.json" />
+    <Content Remove="Products\4d02fefe-de8b-43a8-a7e2-da997e11443c.json" />
+    <Content Remove="Products\77c52567-0b00-4350-95fd-07bc1c00e1e8.json" />
+    <Content Remove="Products\7a83b22a-7eee-46c3-9482-12c9c7c5024e.json" />
+    <Content Remove="Products\85ab14ae-a525-4713-9c6d-0db702672bad.json" />
+    <Content Remove="Products\8663fa0c-de06-4ade-8c0b-0bb9cec56bb3.json" />
+    <Content Remove="Products\9421e274-3b90-47e8-b201-1b8dca1ad6a2.json" />
+    <Content Remove="Products\a340d6ac-5854-44e7-a31b-facc0f0f2ab7.json" />
+    <Content Remove="Products\bcbf62bc-95f2-481a-8c6e-afc1a5cfd117.json" />
+    <Content Remove="Products\c934cb81-e391-4078-b488-bc3a239af4c4.json" />
+    <Content Remove="Products\daa4fc42-ab8a-4a6c-9768-4055abcc0d3c.json" />
+    <Content Remove="Products\e886dc36-04e5-4c81-a7d1-863ba94c5176.json" />
+    <Content Remove="Products\ec193cf9-5f99-48b4-8f5f-1dd04d80cf31.json" />
+    <Content Remove="Products\fb78df81-0e2d-4091-9455-7fae4b93dff7.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Products\124dc85b-b4b5-49d2-aaed-ff7ff515935d.json" />
+    <None Include="Products\1475a79a-e38c-43e9-915b-c71d50dc6a64.json" />
+    <None Include="Products\22bc9cfc-f2cd-4d18-b251-434d06b7618c.json" />
+    <None Include="Products\47a2487b-f4a4-4fb4-8029-8cce3e7d3906.json" />
+    <None Include="Products\4d02fefe-de8b-43a8-a7e2-da997e11443c.json" />
+    <None Include="Products\77c52567-0b00-4350-95fd-07bc1c00e1e8.json" />
+    <None Include="Products\7a83b22a-7eee-46c3-9482-12c9c7c5024e.json" />
+    <None Include="Products\85ab14ae-a525-4713-9c6d-0db702672bad.json" />
+    <None Include="Products\8663fa0c-de06-4ade-8c0b-0bb9cec56bb3.json" />
+    <None Include="Products\9421e274-3b90-47e8-b201-1b8dca1ad6a2.json" />
+    <None Include="Products\a340d6ac-5854-44e7-a31b-facc0f0f2ab7.json" />
+    <None Include="Products\bcbf62bc-95f2-481a-8c6e-afc1a5cfd117.json" />
+    <None Include="Products\c934cb81-e391-4078-b488-bc3a239af4c4.json" />
+    <None Include="Products\daa4fc42-ab8a-4a6c-9768-4055abcc0d3c.json" />
+    <None Include="Products\e886dc36-04e5-4c81-a7d1-863ba94c5176.json" />
+    <None Include="Products\ec193cf9-5f99-48b4-8f5f-1dd04d80cf31.json" />
+    <None Include="Products\fb78df81-0e2d-4091-9455-7fae4b93dff7.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Http" Version="7.1.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 

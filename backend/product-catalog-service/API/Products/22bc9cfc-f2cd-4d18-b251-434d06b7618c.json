@@ -1,6 +1,7 @@
 {
-	"ProductName": "Fantasy Rubber Cat",
+	"DomainId": "22bc9cfc-f2cd-4d18-b251-434d06b7618c",
+	"ProductName": "Pink Fluffy Rubber Duck",
 	"Description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
-	"ImageName": "fantasy-cat-duck.jpeg",
+	"ImageName": "pink-fluffy-duck.jpeg",
 	"Price": 5.0
 }

@@ -1,6 +1,7 @@
 {
-	"ProductName": "Bismuth Rubber Duck",
+	"DomainId": "85ab14ae-a525-4713-9c6d-0db702672bad",
+	"ProductName": "Wizard Rubber Duck",
 	"Description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
-	"ImageName": "bismuth-duck.jpeg",
+	"ImageName": "wizard-duck.jpeg",
 	"Price": 5.0
 }

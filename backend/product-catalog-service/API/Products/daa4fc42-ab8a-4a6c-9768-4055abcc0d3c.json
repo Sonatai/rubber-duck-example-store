@@ -1,6 +1,7 @@
 {
-	"ProductName": "Black Rubber Duck",
+	"DomainId": "daa4fc42-ab8a-4a6c-9768-4055abcc0d3c",
+	"ProductName": "Empowered Rubber Duck",
 	"Description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
-	"ImageName": "black-glowing-pointed-duck.jpeg",
+	"ImageName": "empowered-duck.jpeg",
 	"Price": 5.0
 }

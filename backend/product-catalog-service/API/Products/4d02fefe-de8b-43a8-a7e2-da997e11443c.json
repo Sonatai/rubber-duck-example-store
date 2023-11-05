@@ -1,6 +1,7 @@
 {
-	"ProductName": "Black Rubber Cat",
+	"DomainId": "4d02fefe-de8b-43a8-a7e2-da997e11443c",
+	"ProductName": "Drug Rubber Duck",
 	"Description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
-	"ImageName": "black-cat-duck.jpeg",
+	"ImageName": "drug-duck.jpeg",
 	"Price": 5.0
 }

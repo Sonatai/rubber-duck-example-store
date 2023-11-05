@@ -1,6 +1,7 @@
 {
-	"ProductName": "Happy Rubber Duck",
+	"DomainId": "77c52567-0b00-4350-95fd-07bc1c00e1e8",
+	"ProductName": "Matrix Rubber Duck",
 	"Description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
-	"ImageName": "happy-duck.jpeg",
+	"ImageName": "matrix-duck.jpeg",
 	"Price": 5.0
 }
