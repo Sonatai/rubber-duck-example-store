@@ -1,12 +1,24 @@
+FROM alpine
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
-WORKDIR /API
 
+# Env variables
 ENV ASPNETCORE_ENVIRONMENT=Development
-
 ENV DOTNET_EnableDiagnostics=0
 
-# Build project
-COPY . ./
+ENV UserName=product-catalog-service-user
+ENV GroupName=non-root
+
+# Setup not root user
+RUN addgroup $GroupName
+RUN adduser --ingroup $GroupName $UserName
+
+USER $UserName
+
+# Build Solution
+WORKDIR /API
+
+COPY --chown=$UserName . ./
+RUN chmod -R 755 .
 
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
@@ -14,15 +26,14 @@ RUN dotnet publish -c Release -o out
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /API
-COPY --from=build-env /API/out .
-COPY /Products /API/Products
 
-EXPOSE 8080
-
-#degug:
-RUN ls -al
+COPY --chown=$UserName --from=build-env /API/out .
+COPY --chown=$UserName /Products /API/Products
 
 ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080 
+EXPOSE 8080
+
+#debug:
+RUN ls -al
 
 ENTRYPOINT ["dotnet", "API.dll"]
