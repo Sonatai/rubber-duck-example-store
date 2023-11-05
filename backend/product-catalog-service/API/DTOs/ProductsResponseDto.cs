@@ -2,5 +2,6 @@
 {
     public class ProductsResponseDto
     {
+        public IEnumerable<ProductResponseDto> Products { get; set; } = new List<ProductResponseDto>();
     }
 }

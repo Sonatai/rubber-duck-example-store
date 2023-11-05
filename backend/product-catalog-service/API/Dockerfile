@@ -1,22 +1,28 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+WORKDIR /API
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+ENV ASPNETCORE_ENVIRONMENT=Development
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["API/API.csproj", "API/"]
-RUN dotnet restore "API/API.csproj"
-COPY . .
-WORKDIR "/src/API"
-RUN dotnet build "API.csproj" -c Release -o /app/build
+ENV DOTNET_EnableDiagnostics=0
 
-FROM build AS publish
-RUN dotnet publish "API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+# Build project
+COPY . ./
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /API
+COPY --from=build-env /API/out .
+COPY /Products /API/Products
+
+EXPOSE 8080
+
+#degug:
+RUN ls -al
+
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080 
+
 ENTRYPOINT ["dotnet", "API.dll"]

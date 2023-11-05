@@ -8,20 +8,21 @@ namespace Rubber.Duck.Store.Product.Catalog.Queries.GetProduct;
 public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ActionResult<ProductResponseDto>>
 {
     private readonly ILogger<GetProductQuery> _logger;
+    private readonly AppConfig _appConfig;
 
-    public GetProductQueryHandler(ILogger<GetProductQuery> logger)
+    public GetProductQueryHandler(ILogger<GetProductQuery> logger, AppConfig appConfig)
     {
         _logger = logger;
+        _appConfig = appConfig;
     }
 
     public async Task<ActionResult<ProductResponseDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
         try
         {
+            ProductResponseDto? product = JsonConvert.DeserializeObject<ProductResponseDto>(File.ReadAllText(Path.GetFullPath($"{_appConfig.ProductDataPath}{request.ProductId}.json")));
 
-            ProductResponseDto? product = JsonConvert.DeserializeObject<ProductResponseDto>(File.ReadAllText(Path.GetFullPath($"Products/{request.ProductId}.json")));
-
-            byte[] imageBytes = File.ReadAllBytes(Path.GetFullPath($"Products/img/{request.ProductId}.jpg"));
+            byte[] imageBytes = File.ReadAllBytes(Path.GetFullPath($"{_appConfig.ProductImagePath}{request.ProductId}.jpg"));
             string image = Convert.ToBase64String(imageBytes, 0, imageBytes.Length);
             product.Image = image;
 
