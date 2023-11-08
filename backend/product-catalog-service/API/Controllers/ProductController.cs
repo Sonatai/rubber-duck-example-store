@@ -1,4 +1,3 @@
-using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Rubber.Duck.Store.Product.Catalog.DTOs;
@@ -6,11 +5,10 @@ using Rubber.Duck.Store.Product.Catalog.Queries.GetAllProducts;
 using Rubber.Duck.Store.Product.Catalog.Queries.GetProduct;
 using Rubber.Duck.Store.Product.Catalog.Queries.GetProducts;
 
-namespace Rubber.Duck.Store.Product.Catalog.Controllers.V1;
+namespace Rubber.Duck.Store.Product.Catalog.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("/api/v{version:apiVersion}")]
+[Route("/")]
 public class ProductController : ControllerBase
 {
 
