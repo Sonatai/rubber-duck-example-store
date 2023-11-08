@@ -2,8 +2,8 @@
 {
     public class CartResponseDto
     {
-        public Guid DomainId { get; set; }
-        public Guid UserId { get; set; }
+        public string DomainId { get; set; }
+        public string UserId { get; set; }
         public IEnumerable<SelectedProductDto>? SelectedProducts { get; set; }
         public DateTime TimeStamp { get; private set; }
     }

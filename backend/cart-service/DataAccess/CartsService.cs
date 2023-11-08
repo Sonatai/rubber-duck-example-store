@@ -9,26 +9,31 @@ namespace DataAccess
         private readonly IMongoCollection<Cart> _cartsCollection;
 
         public CartsService(
-        IOptions<DatabaseSettings> bookStoreDatabaseSettings)
+        IOptions<DatabaseSettings> databaseSettings)
         {
             MongoClient mongoClient = new(
-                bookStoreDatabaseSettings.Value.ConnectionString);
+                databaseSettings.Value.ConnectionString);
 
             IMongoDatabase mongoDatabase = mongoClient.GetDatabase(
-                bookStoreDatabaseSettings.Value.DatabaseName);
+                databaseSettings.Value.DatabaseName);
 
             _cartsCollection = mongoDatabase.GetCollection<Cart>(
-                bookStoreDatabaseSettings.Value.BooksCollectionName);
+                databaseSettings.Value.BooksCollectionName);
         }
 
-        public async Task<List<Cart>> GetAsync()
-        {
-            return await _cartsCollection.Find(_ => true).ToListAsync();
-        }
+        //public async Task<List<Cart>> GetAsync()
+        //{
+        //    return await _cartsCollection.Find(_ => true).ToListAsync();
+        //}
 
-        public async Task<Cart?> GetAsync(Guid id)
+        //public async Task<Cart?> GetAsync(string id)
+        //{
+        //    return await _cartsCollection.Find(x => x.DomainId == id).FirstOrDefaultAsync();
+        //}
+
+        public async Task<Cart?> GetByUserIdAsync(string id)
         {
-            return await _cartsCollection.Find(x => x.DomainId == id).FirstOrDefaultAsync();
+            return await _cartsCollection.Find(x => x.UserId == id).FirstOrDefaultAsync();
         }
 
         public async Task CreateAsync(Cart newCart)
@@ -36,14 +41,14 @@ namespace DataAccess
             await _cartsCollection.InsertOneAsync(newCart);
         }
 
-        public async Task UpdateAsync(Guid id, Cart updatedBook)
-        {
-            await _cartsCollection.ReplaceOneAsync(x => x.DomainId == id, updatedBook);
-        }
+        //public async Task UpdateAsync(string id, Cart updatedBook)
+        //{
+        //    await _cartsCollection.ReplaceOneAsync(x => x.DomainId == id, updatedBook);
+        //}
 
-        public async Task RemoveAsync(Guid id)
-        {
-            await _cartsCollection.DeleteOneAsync(x => x.DomainId == id);
-        }
+        //public async Task RemoveAsync(string id)
+        //{
+        //    await _cartsCollection.DeleteOneAsync(x => x.DomainId == id);
+        //}
     }
 }

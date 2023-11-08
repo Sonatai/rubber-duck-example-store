@@ -16,10 +16,9 @@ USER $UserName
 
 # Build Solution
 WORKDIR /API
-
 COPY --chown=$UserName . ./
-RUN chmod -R 755 .
 
+WORKDIR /API
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 

@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("CartServiceDatabase"));
+    builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddSingleton<CartsService>();
 
 

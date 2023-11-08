@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "product-catalog-serv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CartService", "CartService", "{59758C74-4E8E-43FF-ABDD-7B8075E49ACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "cart-service\API\API.csproj", "{FAEE1017-77E1-498A-B4DE-2D192ED79B38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "cart-service\API\API.csproj", "{FAEE1017-77E1-498A-B4DE-2D192ED79B38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "cart-service\DataAccess\DataAccess.csproj", "{E54A6735-AEFD-4314-908C-81F5348EA3BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "cart-service\DataAccess\DataAccess.csproj", "{E54A6735-AEFD-4314-908C-81F5348EA3BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "cart-service\Core\Core.csproj", "{BB8913C9-EAC9-4665-86BB-7CD5CA74C93A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "cart-service\Core\Core.csproj", "{BB8913C9-EAC9-4665-86BB-7CD5CA74C93A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
