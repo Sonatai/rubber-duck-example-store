@@ -16,12 +16,25 @@ builder.Services.AddSingleton(service => builder.Configuration
     .Get<AppConfig>()
 );
 
+
+//Don't do this for production..
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(opt =>
+    {
+        opt.AllowAnyHeader();
+        opt.AllowAnyMethod();
+        opt.AllowAnyOrigin();
+    });
+});
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
-app.UseSwaggerUI()
-    ;
+app.UseSwaggerUI();
+app.UseCors();
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseDeveloperExceptionPage();
