@@ -1,3 +1,5 @@
+using DataAccess;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.Configure<DatabaseSettings>(
+    builder.Configuration.GetSection("CartServiceDatabase"));
+builder.Services.AddSingleton<CartsService>();
+
 
 //Don't do this for production..
 builder.Services.AddCors(options =>
