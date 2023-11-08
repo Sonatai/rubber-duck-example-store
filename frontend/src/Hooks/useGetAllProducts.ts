@@ -9,15 +9,19 @@ interface IProductsResponseDto {
 	image: string;
 }
 
-const getAllProducts = async () => {
+const getAllProducts = async (): Promise<IProductsResponseDto[]> => {
 	const data = await axios('https://localhost:44342/products');
 
-	return data;
+	return data.data.products;
 };
 
 export const useGetAllProducts = () => {
-	return useQuery('AllProducts', async () => await getAllProducts(), {
-		cacheTime: 60 * 60 * 24,
-		staleTime: 60 * 60 * 24,
-	});
+	return useQuery<IProductsResponseDto[]>(
+		'AllProducts',
+		async () => await getAllProducts(),
+		{
+			cacheTime: 60 * 60 * 24,
+			staleTime: 60 * 60 * 24,
+		}
+	);
 };
