@@ -1,0 +1,10 @@
+.product-style {
+    width: 25rem;
+    background-color: #fbeeef !important;
+    &--action {
+        justify-content: flex-end;
+        > button {
+            margin-left: 0.5rem;
+        }
+    }
+}
