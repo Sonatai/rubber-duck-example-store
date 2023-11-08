@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { IProductsResponseDto } from '../shared/interfaces/product.interfaces';
 
 const getAllProducts = async (): Promise<IProductsResponseDto[]> => {
-    const data = await axios('https://localhost:44342/products');
+    const data = await axios('http://localhost:4200/products');
 
     return data.data.products;
 };
