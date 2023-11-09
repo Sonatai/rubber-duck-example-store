@@ -1,24 +1,25 @@
-﻿using Core;
-using Microsoft.Extensions.Options;
+﻿using API.CoreModels;
 using MongoDB.Driver;
 
-namespace DataAccess
+namespace API.DataAccess
 {
     public class CartsService
     {
         private readonly IMongoCollection<Cart> _cartsCollection;
 
+        /*@note: 
+         * Docker konnte in dieser API die Appsettings nicht lesen 
+         * und ich hatte nicht genug Zeit rauszufinden warum er sie nicht finde :)
+         */
+
         public CartsService(
-        IOptions<DatabaseSettings> databaseSettings)
+        DatabaseSettings _)
         {
-            MongoClient mongoClient = new(
-                databaseSettings.Value.ConnectionString);
+            MongoClient mongoClient = new("mongodb://admin:1234@172.17.0.1:4300/");
 
-            IMongoDatabase mongoDatabase = mongoClient.GetDatabase(
-                databaseSettings.Value.DatabaseName);
+            IMongoDatabase mongoDatabase = mongoClient.GetDatabase("cart");
 
-            _cartsCollection = mongoDatabase.GetCollection<Cart>(
-                databaseSettings.Value.BooksCollectionName);
+            _cartsCollection = mongoDatabase.GetCollection<Cart>("carts");
         }
 
         public async Task<Cart?> GetAsync(string id)

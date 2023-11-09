@@ -1,7 +1,7 @@
-﻿using API.DTOs;
+﻿using API.CoreModels;
+using API.DataAccess;
+using API.DTOs;
 using AutoMapper;
-using Core;
-using DataAccess;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

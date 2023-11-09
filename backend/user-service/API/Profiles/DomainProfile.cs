@@ -1,6 +1,6 @@
-﻿using API.DTOs;
+﻿using API.CoreModels;
+using API.DTOs;
 using AutoMapper;
-using Core;
 
 namespace API.Profiles
 {

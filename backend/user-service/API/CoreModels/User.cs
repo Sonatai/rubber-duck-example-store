@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using BC = BCrypt.Net.BCrypt;
 
-namespace Core
+namespace API.CoreModels
 {
     public class User
     {

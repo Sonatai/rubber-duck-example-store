@@ -1,4 +1,4 @@
-﻿namespace DataAccess
+﻿namespace API.DataAccess
 {
     public class DatabaseSettings
     {

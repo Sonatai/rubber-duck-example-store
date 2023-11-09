@@ -1,6 +1,7 @@
-import { PropsWithChildren, createContext, useState } from 'react';
-import { UserContextType } from './userContext.types';
+import { createContext, PropsWithChildren, useState } from 'react';
+
 import { IUser } from '../shared/interfaces/user.interface';
+import { UserContextType } from './userContext.types';
 
 export const UserContext = createContext<UserContextType | null>(null);
 

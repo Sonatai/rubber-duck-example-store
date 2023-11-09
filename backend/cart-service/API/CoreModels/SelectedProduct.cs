@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace API.CoreModels
 {
     public class SelectedProduct
     {

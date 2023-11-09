@@ -1,7 +1,7 @@
 ﻿using API.Commands.CreateCart;
+using API.CoreModels;
+using API.DataAccess;
 using AutoMapper;
-using Core;
-using DataAccess;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

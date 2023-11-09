@@ -5,11 +5,11 @@
 
         &__input {
             width: 20rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1rem !important;
         }
     }
 
     &__button {
-        margin-right: 1rem;
+        margin-right: 1rem !important;
     }
 }
