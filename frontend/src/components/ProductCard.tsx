@@ -33,13 +33,15 @@ export const ProductCard = (props: IProductCart): JSX.Element => {
     const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {
-        const product = cart.selectedProducts.filter(
-            (p) => p.domainId === domainId
-        );
-        if (product.length === 1) {
-            setQuantity(product[0].quantity);
+        if (cart?.selectedProducts !== undefined) {
+            const product = cart.selectedProducts.filter(
+                (p) => p.domainId === domainId
+            );
+            if (product.length === 1) {
+                setQuantity(product[0].quantity);
+            }
         }
-    }, []);
+    }, [cart]);
 
     const selectProduct = async (productId: string, quantity: number) => {
         let clonedCart = structuredClone(cart);
