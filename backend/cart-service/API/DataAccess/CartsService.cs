@@ -7,19 +7,14 @@ namespace API.DataAccess
     {
         private readonly IMongoCollection<Cart> _cartsCollection;
 
-        /*@note: 
-         * Docker konnte in dieser API die Appsettings nicht lesen 
-         * und ich hatte nicht genug Zeit rauszufinden warum er sie nicht finde :)
-         */
-
         public CartsService(
-        DatabaseSettings _)
+        DatabaseSettings databaseSettings)
         {
-            MongoClient mongoClient = new("mongodb://admin:1234@172.17.0.1:4300/");
+            MongoClient mongoClient = new(databaseSettings.ConnectionString);
 
-            IMongoDatabase mongoDatabase = mongoClient.GetDatabase("cart");
+            IMongoDatabase mongoDatabase = mongoClient.GetDatabase(databaseSettings.DatabaseName);
 
-            _cartsCollection = mongoDatabase.GetCollection<Cart>("carts");
+            _cartsCollection = mongoDatabase.GetCollection<Cart>(databaseSettings.CollectionName);
         }
 
         public async Task<Cart?> GetAsync(string id)

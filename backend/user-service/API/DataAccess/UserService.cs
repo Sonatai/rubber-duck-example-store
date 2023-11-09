@@ -7,18 +7,13 @@ namespace API.DataAccess
     {
         private readonly IMongoCollection<User> _userCollection;
 
-        /*@note: 
-         * Docker konnte in dieser API die Appsettings nicht lesen 
-         * und ich hatte nicht genug Zeit rauszufinden warum er sie nicht finde :)
-         */
-
-        public UserService(DatabaseSettings _)
+        public UserService(DatabaseSettings databaseSettings)
         {
-            MongoClient mongoClient = new("mongodb://admin:1234@172.17.0.1:4310/");
+            MongoClient mongoClient = new(databaseSettings.ConnectionString);
 
-            IMongoDatabase mongoDatabase = mongoClient.GetDatabase("userDb");
+            IMongoDatabase mongoDatabase = mongoClient.GetDatabase(databaseSettings.DatabaseName);
 
-            _userCollection = mongoDatabase.GetCollection<User>("users");
+            _userCollection = mongoDatabase.GetCollection<User>(databaseSettings.CollectionName);
         }
 
         public async Task<User?> GetAsync(string id)
