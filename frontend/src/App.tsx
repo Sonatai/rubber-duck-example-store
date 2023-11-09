@@ -1,15 +1,20 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { StartPage } from './pages/StartPage';
+import { ProductsPage } from './pages/ProductsPage';
+import { LoginPage } from './pages/LoginPage';
+import { UserProvider } from './userContext/userContext';
 
 export const App = (): JSX.Element => {
-	return (
-		<main>
-			<Routes>
-				<Route path='/' element={<StartPage />} />
-			</Routes>
-		</main>
-	);
+    return (
+        <UserProvider>
+            <main>
+                <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/" element={<ProductsPage />} />
+                </Routes>
+            </main>
+        </UserProvider>
+    );
 };
 
 export default App;

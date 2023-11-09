@@ -1,14 +1,23 @@
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { ProductCard } from '../components/ProductCard';
 import { useGetAllProducts } from '../Hooks/useGetAllProducts';
 import { RubberDuckContainer } from '../shared';
-import { Typography } from '@mui/material';
+import { UserContext } from '../userContext/userContext';
+import { UserContextType } from '../userContext/userContext.types';
 
-export const StartPage = () => {
+export const ProductsPage = (): JSX.Element => {
     const { data } = useGetAllProducts();
 
-    console.log('DATA', data);
+    const { user } = useContext(UserContext) as UserContextType;
+
+    if (user?.userId === undefined || user?.userId === null) {
+        return <Navigate to="/login" replace={true} />;
+    }
 
     return (
         <RubberDuckContainer>

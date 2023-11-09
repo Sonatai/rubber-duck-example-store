@@ -9,6 +9,7 @@ import {
     CardContent,
     CardMedia,
     Input,
+    TextField,
     Typography,
 } from '@mui/material';
 
@@ -17,7 +18,7 @@ import { IProductsResponseDto } from '../shared/interfaces/product.interfaces';
 export const ProductCard = (props: IProductsResponseDto): JSX.Element => {
     const { description, image, price, productName } = props;
 
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(0);
 
     return (
         <Card variant="outlined" className="product-style">
@@ -35,12 +36,13 @@ export const ProductCard = (props: IProductsResponseDto): JSX.Element => {
                 <Typography>Price: € {price}</Typography>
             </CardContent>
             <CardActions classes={{ root: 'product-style--action' }}>
-                <Input
+                <TextField
                     value={quantity}
                     onChange={(event: any) =>
                         setQuantity(Number(event.target.value))
                     }
                     type="number"
+                    InputProps={{ inputProps: { min: 0, max: 10 } }}
                 />
                 <Button onClick={() => alert('Add to cart in the future')}>
                     Add to Cart
