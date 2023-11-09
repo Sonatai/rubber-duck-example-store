@@ -1,4 +1,8 @@
+using API.Commands.Login;
+using API.Commands.Register;
+using API.DTOs;
 using DataAccess;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -8,27 +12,30 @@ namespace API.Controllers
     public class UserController : ControllerBase
     {
 
+        private readonly IMediator _mediator;
         private readonly UserService _userService;
 
-        public UserController(UserService userService)
+        public UserController(IMediator mediator, UserService userService)
         {
+            _mediator = mediator;
             _userService = userService;
         }
 
         [HttpPost("/register")]
-        public async Task<ActionResult> RegisterUser()
+        public async Task<ActionResult<UserResponseDto>> RegisterUser([FromBody] UserRequestDto userDto)
         {
-            await _userService.CreateAsync(new Core.User("Test", "1234"));
+            ActionResult<UserResponseDto> response = await _mediator.Send(new RegisterCommand() { User = userDto });
 
-            return NoContent();
+            return response;
         }
 
         [HttpPost("/login")]
-        public async Task<ActionResult> LoginUser()
+        public async Task<ActionResult<UserResponseDto>> LoginUser([FromBody] UserRequestDto userDto)
         {
-            await _userService.CreateAsync(new Core.User("Test", "1234"));
 
-            return NoContent();
+            ActionResult<UserResponseDto> response = await _mediator.Send(new LoginCommand() { User = userDto });
+
+            return response;
         }
     }
 }

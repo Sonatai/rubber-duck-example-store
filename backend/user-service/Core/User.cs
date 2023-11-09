@@ -1,5 +1,7 @@
-﻿using MongoDB.Bson;
+﻿using BCrypt.Net;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using BC = BCrypt.Net.BCrypt;
 
 namespace Core
 {
@@ -11,10 +13,12 @@ namespace Core
         public string Name { get; private set; }
         public string Password { get; private set; }
 
-        public User(string name, string password)
+        public User(string? id, string name, string password)
         {
+
             Name = name;
-            Password = password;
+            Password = BC.EnhancedHashPassword(password, hashType: HashType.SHA384);
+            Id = id;
         }
     }
 }

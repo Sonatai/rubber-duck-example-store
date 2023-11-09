@@ -27,19 +27,11 @@ namespace DataAccess
         }
 
 
-        public async Task CreateAsync(User newCart)
+        public async Task<User?> CreateAsync(User newCart)
         {
             await _userCollection.InsertOneAsync(newCart);
-        }
 
-        public async Task UpdateAsync(string id, User updatedBook)
-        {
-            await _userCollection.ReplaceOneAsync(x => x.Name == id, updatedBook);
-        }
-
-        public async Task RemoveAsync(string id)
-        {
-            await _userCollection.DeleteOneAsync(x => x.Name == id);
+            return newCart;
         }
     }
 }
