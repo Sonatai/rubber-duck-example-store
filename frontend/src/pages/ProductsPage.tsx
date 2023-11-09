@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { ProductCard } from '../components/ProductCard';
@@ -11,6 +11,7 @@ import { UserContext } from '../userContext/userContext';
 import { UserContextType } from '../userContext/userContext.types';
 import { ICart } from '../shared/interfaces/cart.interfaces';
 import axios, { AxiosResponse } from 'axios';
+import './products.styles.scss';
 
 const createCart = async (
     userId: string
@@ -69,6 +70,13 @@ export const ProductsPage = (): JSX.Element => {
             <Typography variant="h1" component="h1" mb="2rem">
                 Awesome Rubber Duck Store
             </Typography>
+            <Button
+                variant="outlined"
+                onClick={() => alert(JSON.stringify(cart, null, 2))}
+                className="cart-button"
+            >
+                Check Cart
+            </Button>
             <Grid container spacing={1}>
                 {products?.map((product) => (
                     <Grid key={product.domainId} xs={4}>
