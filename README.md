@@ -1,5 +1,7 @@
 # rubber-duck-example-store
 
+Repo: https://github.com/Sonatai/rubber-duck-example-store
+
 ## Architecture & Features
 
 ![Architecture](./docs/architecture.svg)
