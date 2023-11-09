@@ -1,22 +1,38 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM alpine
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+# Env variables
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_EnableDiagnostics=0
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["user-service/API/API.csproj", "user-service/API/"]
-RUN dotnet restore "user-service/API/API.csproj"
-COPY . .
-WORKDIR "/src/user-service/API"
-RUN dotnet build "API.csproj" -c Release -o /app/build
+ENV UserName=user-service-user
+ENV GroupName=non-root
 
-FROM build AS publish
-RUN dotnet publish "API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+# Setup not root user
+RUN addgroup $GroupName
+RUN adduser --ingroup $GroupName $UserName
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+USER $UserName
+
+# Build Solution
+WORKDIR /API
+
+COPY --chown=$UserName . ./
+RUN chmod -R 755 .
+
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /API
+
+COPY --chown=$UserName --from=build-env /API/out .
+
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+
+#debug:
+RUN ls -al
+
 ENTRYPOINT ["dotnet", "API.dll"]

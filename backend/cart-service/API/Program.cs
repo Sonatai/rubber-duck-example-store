@@ -1,5 +1,5 @@
+using API.DataAccess;
 using API.Profiles;
-using DataAccess;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +13,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddAutoMapper(typeof(DomainProfile));
 
-builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("DatabaseSettings"));
+builder.Services.AddSingleton(service => builder.Configuration
+    .GetSection("DatabaseSettings")
+    .Get<DatabaseSettings>()
+);
+
 builder.Services.AddSingleton<CartsService>();
 
 

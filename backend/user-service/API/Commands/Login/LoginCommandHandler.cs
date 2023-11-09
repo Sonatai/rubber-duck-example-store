@@ -1,9 +1,9 @@
 ﻿using API.Commands.Register;
+using API.CoreModels;
+using API.DataAccess;
 using API.DTOs;
 using AutoMapper;
 using BCrypt.Net;
-using Core;
-using DataAccess;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

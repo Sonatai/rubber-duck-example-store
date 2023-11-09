@@ -1,15 +1,16 @@
+import './login.styles.scss';
+
 import axios, { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
+import { Navigate } from 'react-router';
 
-import { Input } from '@mui/base';
+import { Button, TextField, Typography } from '@mui/material';
 
 import { RubberDuckContainer } from '../shared';
 import { IUser } from '../shared/interfaces/user.interface';
-import { Button, InputLabel, TextField, Typography } from '@mui/material';
 import { UserContext } from '../userContext/userContext';
 import { UserContextType } from '../userContext/userContext.types';
-import { Navigate, redirect } from 'react-router';
-import './login.styles.scss';
+
 const registerUser = async (
     name: string,
     password: string

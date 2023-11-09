@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using Core;
-using DataAccess;
+﻿using API.CoreModels;
+using API.DataAccess;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -8,7 +8,6 @@ import {
     CardActions,
     CardContent,
     CardMedia,
-    Input,
     TextField,
     Typography,
 } from '@mui/material';

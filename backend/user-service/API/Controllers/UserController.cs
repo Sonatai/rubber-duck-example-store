@@ -1,7 +1,7 @@
 using API.Commands.Login;
 using API.Commands.Register;
+using API.DataAccess;
 using API.DTOs;
-using DataAccess;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
