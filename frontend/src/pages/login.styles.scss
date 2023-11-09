@@ -1,0 +1,15 @@
+.login {
+    &__input-group {
+        display: flex;
+        flex-direction: column;
+
+        &__input {
+            width: 20rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__button {
+        margin-right: 1rem;
+    }
+}

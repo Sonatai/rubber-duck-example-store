@@ -1,12 +1,15 @@
 import axios, { AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { Input } from '@mui/base';
 
 import { RubberDuckContainer } from '../shared';
 import { IUser } from '../shared/interfaces/user.interface';
-import { Button, InputLabel, Typography } from '@mui/material';
-
+import { Button, InputLabel, TextField, Typography } from '@mui/material';
+import { UserContext } from '../userContext/userContext';
+import { UserContextType } from '../userContext/userContext.types';
+import { Navigate, redirect } from 'react-router';
+import './login.styles.scss';
 const registerUser = async (
     name: string,
     password: string
@@ -27,10 +30,12 @@ const loginUser = async (
     });
 };
 
-export const LoginPage = () => {
+export const LoginPage = (): JSX.Element => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    const { user, setUser } = useContext(UserContext) as UserContextType;
 
     useEffect(() => {
         setErrorMessage(null);
@@ -43,7 +48,7 @@ export const LoginPage = () => {
             setErrorMessage('Enter password and user name');
         } else {
             loginUser(name, password)
-                .then(() => alert('you are logged in'))
+                .then((response) => setUser({ userId: response.data.userId }))
                 .catch((data) => {
                     if (data.response.status === 422) {
                         setErrorMessage('User name or password is wrong');
@@ -61,7 +66,7 @@ export const LoginPage = () => {
             setErrorMessage('Enter password and user name');
         } else {
             registerUser(name, password)
-                .then(() => alert('you are register'))
+                .then((response) => setUser({ userId: response.data.userId }))
                 .catch((data) => {
                     if (data.response.status === 422) {
                         setErrorMessage('User name already exists.');
@@ -72,32 +77,45 @@ export const LoginPage = () => {
         }
     };
 
+    if (user?.userId !== undefined && user?.userId !== null) {
+        return <Navigate to="/" />;
+    }
+
     return (
         <RubberDuckContainer>
+            <div className="login" />
             <Typography variant="h1" component="h1" mb="2rem">
                 Awesome Rubber Duck Store
             </Typography>
             <Typography variant="body1" mb="1rem">
                 Please login to see our products.
             </Typography>
-            <InputLabel itemID={name}>User Name</InputLabel>
-            <Input
-                name={name}
-                value={name}
-                onChange={(event: any) => setName(event.target.value)}
-            />
-            <InputLabel itemID={password}>Password</InputLabel>
-            <Input
-                name={password}
-                value={password}
-                onChange={(event: any) => setPassword(event.target.value)}
-            />
+            <div className="login__input-group">
+                <TextField
+                    label="User Name"
+                    name={name}
+                    value={name}
+                    onChange={(event: any) => setName(event.target.value)}
+                    className="login__input-group__input"
+                />
+                <TextField
+                    label="Password"
+                    name={password}
+                    value={password}
+                    onChange={(event: any) => setPassword(event.target.value)}
+                    className="login__input-group__input"
+                />
+            </div>
 
             {errorMessage !== '' && (
                 <Typography variant="body1">{errorMessage}</Typography>
             )}
 
-            <Button variant="contained" onClick={handleLogin}>
+            <Button
+                variant="contained"
+                onClick={handleLogin}
+                className="login__button"
+            >
                 Login
             </Button>
             <Button onClick={handleRegister}>Register</Button>
