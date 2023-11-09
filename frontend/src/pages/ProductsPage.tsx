@@ -5,10 +5,8 @@ import { useGetAllProducts } from '../Hooks/useGetAllProducts';
 import { RubberDuckContainer } from '../shared';
 import { Typography } from '@mui/material';
 
-export const StartPage = () => {
+export const ProductsPage = (): JSX.Element => {
     const { data } = useGetAllProducts();
-
-    console.log('DATA', data);
 
     return (
         <RubberDuckContainer>
