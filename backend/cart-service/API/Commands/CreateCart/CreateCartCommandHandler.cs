@@ -1,12 +1,13 @@
 ﻿using API.CoreModels;
 using API.DataAccess;
+using API.DTOs;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Commands.CreateCart
 {
-    public class CreateCartCommandHandler : IRequestHandler<CreateCartCommand, ActionResult>
+    public class CreateCartCommandHandler : IRequestHandler<CreateCartCommand, ActionResult<CartResponseDto>>
     {
         private readonly IMapper _mapper;
         private readonly CartsService _cartsService;
@@ -19,15 +20,15 @@ namespace API.Commands.CreateCart
             _logger = logger;
         }
 
-        public async Task<ActionResult> Handle(CreateCartCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult<CartResponseDto>> Handle(CreateCartCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 Cart newCart = _mapper.Map<Cart>(request.Cart);
 
-                await _cartsService.CreateAsync(newCart);
+                Cart cart = await _cartsService.CreateAsync(newCart);
 
-                return new NoContentResult();
+                return new OkObjectResult(_mapper.Map<CartResponseDto>(cart));
             }
             catch (Exception ex)
             {

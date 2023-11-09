@@ -1,6 +1,6 @@
 import './productcard.style.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
     Button,
@@ -13,11 +13,68 @@ import {
 } from '@mui/material';
 
 import { IProductsResponseDto } from '../shared/interfaces/product.interfaces';
+import { ICart } from '../shared/interfaces/cart.interfaces';
+import axios, { AxiosResponse } from 'axios';
 
-export const ProductCard = (props: IProductsResponseDto): JSX.Element => {
-    const { description, image, price, productName } = props;
+const updateCart = async (cart: ICart): Promise<AxiosResponse<ICart, any>> => {
+    return axios.post(`http://localhost:4210/cart/update`, cart);
+};
+
+interface IProductCart {
+    product: IProductsResponseDto;
+    setCart: any;
+    cart: ICart;
+}
+
+export const ProductCard = (props: IProductCart): JSX.Element => {
+    const { product, setCart, cart } = props;
+    const { description, image, price, productName, domainId } = product;
 
     const [quantity, setQuantity] = useState(0);
+
+    useEffect(() => {
+        if (cart?.selectedProducts !== undefined) {
+            const product = cart.selectedProducts.filter(
+                (p) => p.domainId === domainId
+            );
+            if (product.length === 1) {
+                setQuantity(product[0].quantity);
+            }
+        }
+    }, [cart]);
+
+    const selectProduct = async (productId: string, quantity: number) => {
+        let clonedCart = structuredClone(cart);
+
+        if (quantity === 0) {
+            const products = clonedCart.selectedProducts.filter(
+                (product) => product.domainId !== productId
+            );
+
+            clonedCart.selectedProducts = products;
+        } else {
+            const product = clonedCart.selectedProducts.filter(
+                (product) => product.domainId == productId
+            );
+
+            if (product.length === 0) {
+                clonedCart.selectedProducts.push({
+                    domainId: productId,
+                    quantity: quantity,
+                });
+            } else {
+                product[0].quantity = quantity;
+                const products = clonedCart.selectedProducts.filter(
+                    (product) => product.domainId !== productId
+                );
+                products.push(product[0]);
+                clonedCart.selectedProducts = products;
+            }
+        }
+
+        setCart(clonedCart);
+        await updateCart(clonedCart);
+    };
 
     return (
         <Card variant="outlined" className="product-style">
@@ -43,7 +100,11 @@ export const ProductCard = (props: IProductsResponseDto): JSX.Element => {
                     type="number"
                     InputProps={{ inputProps: { min: 0, max: 10 } }}
                 />
-                <Button onClick={() => alert('Add to cart in the future')}>
+                <Button
+                    onClick={async () =>
+                        await selectProduct(domainId, quantity)
+                    }
+                >
                     Add to Cart
                 </Button>
             </CardActions>

@@ -20,9 +20,9 @@ namespace API.Controllers
         }
 
         [HttpPost("/cart")]
-        public async Task<ActionResult> CreateCart([FromBody] CartRequestDto requestDto)
+        public async Task<ActionResult<CartResponseDto>> CreateCart([FromBody] CartRequestDto requestDto)
         {
-            ActionResult response = await _mediator.Send(new CreateCartCommand() { Cart = requestDto });
+            ActionResult<CartResponseDto> response = await _mediator.Send(new CreateCartCommand() { Cart = requestDto });
 
             return response;
         }
@@ -43,7 +43,7 @@ namespace API.Controllers
             return response;
         }
 
-        [HttpPut("/cart")]
+        [HttpPost("/cart/update")]
         public async Task<ActionResult> UpdateCart([FromBody] CartRequestDto requestDto)
         {
             ActionResult response = await _mediator.Send(new UpdateCartCommand() { Cart = requestDto });

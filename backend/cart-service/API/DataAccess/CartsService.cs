@@ -32,9 +32,11 @@ namespace API.DataAccess
             return await _cartsCollection.Find(x => x.UserId == id).FirstOrDefaultAsync();
         }
 
-        public async Task CreateAsync(Cart newCart)
+        public async Task<Cart> CreateAsync(Cart newCart)
         {
             await _cartsCollection.InsertOneAsync(newCart);
+
+            return newCart;
         }
 
         public async Task UpdateAsync(string id, Cart updatedBook)
