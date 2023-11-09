@@ -1,4 +1,5 @@
-using Rubber.Duck.Store.Product.Catalog;
+using API.Profiles;
+using DataAccess;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +11,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddSingleton(service => builder.Configuration
-    .GetSection("AppConfig")
-    .Get<AppConfig>()
-);
+builder.Services.AddAutoMapper(typeof(DomainProfile));
+
+builder.Services.Configure<DatabaseSettings>(
+    builder.Configuration.GetSection("DatabaseSettings"));
+builder.Services.AddSingleton<CartsService>();
 
 
 //Don't do this for production..
@@ -29,14 +31,13 @@ builder.Services.AddCors(options =>
 
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors();
 
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
-app.UseDeveloperExceptionPage();
 
 app.MapControllers();
 
