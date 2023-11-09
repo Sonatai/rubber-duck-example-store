@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { Typography } from '@mui/material';
@@ -9,11 +9,56 @@ import { useGetAllProducts } from '../Hooks/useGetAllProducts';
 import { RubberDuckContainer } from '../shared';
 import { UserContext } from '../userContext/userContext';
 import { UserContextType } from '../userContext/userContext.types';
+import { ICart } from '../shared/interfaces/cart.interfaces';
+import axios, { AxiosResponse } from 'axios';
+
+const createCart = async (
+    userId: string
+): Promise<AxiosResponse<ICart, any>> => {
+    return axios.post('http://localhost:4210/cart', {
+        userId: userId,
+    });
+};
+
+const getCartByUserId = async (
+    userId: string
+): Promise<AxiosResponse<ICart, any>> => {
+    return axios.get(`http://localhost:4210/cart/user/${userId}`);
+};
 
 export const ProductsPage = (): JSX.Element => {
-    const { data } = useGetAllProducts();
+    const { data: products } = useGetAllProducts();
 
     const { user } = useContext(UserContext) as UserContextType;
+
+    const [cart, setCart] = useState<ICart>({} as ICart);
+
+    useEffect(() => {
+        const initiateCart = async () => {
+            if (user?.userId !== undefined && user.userId !== null) {
+                getCartByUserId(user.userId)
+                    .then((response) => {
+                        if (response.status === 200) {
+                            setCart(response.data);
+                        } else if (response.status === 204) {
+                            createCart(user.userId)
+                                .then((response) => {
+                                    setCart(response.data);
+                                })
+                                .catch(() => alert('Something went wrong :('));
+                        }
+                    })
+                    .catch(() => alert('Something went wrong :('));
+            }
+        };
+
+        initiateCart();
+    }, [user?.userId]);
+
+    useEffect(() => {
+        console.log('CART');
+        console.log(cart);
+    }, [cart]);
 
     if (user?.userId === undefined || user?.userId === null) {
         return <Navigate to="/login" replace={true} />;
@@ -25,14 +70,18 @@ export const ProductsPage = (): JSX.Element => {
                 Awesome Rubber Duck Store
             </Typography>
             <Grid container spacing={1}>
-                {data?.map((product) => (
+                {products?.map((product) => (
                     <Grid key={product.domainId} xs={4}>
                         <ProductCard
-                            description={product.description}
-                            domainId={product.domainId}
-                            productName={product.productName}
-                            price={product.price}
-                            image={product.image}
+                            product={{
+                                description: product.description,
+                                domainId: product.domainId,
+                                productName: product.productName,
+                                price: product.price,
+                                image: product.image,
+                            }}
+                            cart={cart}
+                            setCart={setCart}
                         />
                     </Grid>
                 ))}
