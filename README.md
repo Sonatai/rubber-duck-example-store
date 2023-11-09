@@ -8,7 +8,10 @@ So, the user can register and login. Also they can see a list of products. They 
 
 ## How to Setup
 
-Open a terminal in the root folder
+WSL2 need to be enabled and your Docker should use it:
+https://docs.docker.com/desktop/wsl/
+
+Open a terminal in the root folder.
 
 ### Setup Databases
 
