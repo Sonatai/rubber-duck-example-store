@@ -21,15 +21,10 @@ namespace DataAccess
                 databaseSettings.Value.BooksCollectionName);
         }
 
-        //public async Task<List<Cart>> GetAsync()
-        //{
-        //    return await _cartsCollection.Find(_ => true).ToListAsync();
-        //}
-
-        //public async Task<Cart?> GetAsync(string id)
-        //{
-        //    return await _cartsCollection.Find(x => x.DomainId == id).FirstOrDefaultAsync();
-        //}
+        public async Task<Cart?> GetAsync(string id)
+        {
+            return await _cartsCollection.Find(x => x.DomainId == id).FirstOrDefaultAsync();
+        }
 
         public async Task<Cart?> GetByUserIdAsync(string id)
         {
@@ -41,14 +36,14 @@ namespace DataAccess
             await _cartsCollection.InsertOneAsync(newCart);
         }
 
-        //public async Task UpdateAsync(string id, Cart updatedBook)
-        //{
-        //    await _cartsCollection.ReplaceOneAsync(x => x.DomainId == id, updatedBook);
-        //}
+        public async Task UpdateAsync(string id, Cart updatedBook)
+        {
+            await _cartsCollection.ReplaceOneAsync(x => x.DomainId == id, updatedBook);
+        }
 
-        //public async Task RemoveAsync(string id)
-        //{
-        //    await _cartsCollection.DeleteOneAsync(x => x.DomainId == id);
-        //}
+        public async Task RemoveAsync(string id)
+        {
+            await _cartsCollection.DeleteOneAsync(x => x.DomainId == id);
+        }
     }
 }
